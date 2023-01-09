@@ -1,0 +1,367 @@
+/* Root vars */
+:root {
+  --backgroundColor: white;
+  --componentBackgroundColor: #f8f8f8;
+  --primaryColor: black;
+  --accentColor: #63236d;
+  --textColor: #222222;
+  --h1-font: "Roboto", Helvetica, sans-serif;
+  --h1-size: 1.5em;
+  --h2-size: 1.2em;
+  --p-font: "Lora", Arial, sans-serif;
+  --p-size: 1em;
+  --mono-font: "Fira Mono", Courier, monospace;
+}
+
+/* CSS reset */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+form {
+  margin: 0;
+  padding: 0;
+}
+
+textarea {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: var(--accentColor);
+}
+
+/* Begin styles */
+
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
+section {
+  background-color: var(--backgroundColor);
+}
+
+h1 {
+  font-size: var(--h1-size);
+  font-family: var(--h1-font);
+  color: var(--accentColor);
+  padding-bottom: 0.5em;
+}
+
+h2 {
+  font-size: var(--h2-size);
+  font-family: var(--h1-font);
+  color: var(--accentColor);
+}
+
+p,
+ol > *,
+ul > *,
+table,
+blockquote {
+  font-size: var(--p-size);
+  font-family: var(--p-font);
+  color: var(--textColor);
+}
+
+a {
+  position: relative;
+}
+
+a::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  right: 100%;
+  bottom: 0.1em;
+  background: var(--accentColor);
+  height: 0.0625em;
+  transition: right 0.4s ease-in-out;
+}
+
+a:hover::after,
+a:focus::after,
+a:active::after {
+  right: 0;
+}
+
+/* Global classes */
+
+.darkMode {
+  --backgroundColor: #222;
+  --primaryColor: white;
+  --accentColor: #bb86fc;
+  --textColor: #dddddd;
+  --componentBackgroundColor: #333;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 28px;
+  margin: 0 8px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 34px;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: var(--accentColor);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--accentColor);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(32px);
+  -ms-transform: translateX(32px);
+  transform: translateX(32px);
+}
+
+/* Structural classes */
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+.App {
+  height: 100%;
+  width: 100%;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.App_header {
+  height: auto;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.App_container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1em;
+  flex: 1;
+  min-height: 0;
+}
+
+.App_component {
+  width: 100%;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.App_component_header {
+  height: auto;
+  width: 100%;
+  text-align: center;
+  display: block;
+}
+
+.App_attribution {
+  position: relative;
+  height: auto;
+}
+
+.App_attribution_text {
+  font-style: italic;
+}
+
+.App_bottomBar {
+  width: 100%;
+  padding-top: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.App_themeWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-right: 8px;
+}
+
+.App_themeLabel {
+  display: inline-block;
+  text-align: center;
+}
+
+.App_themeLabel--small {
+  text-align: center;
+  display: none;
+}
+
+.Editor,
+.Previewer {
+  height: 100%;
+  width: 100%;
+  padding: 4px;
+  overflow: scroll;
+  background-color: var(--componentBackgroundColor);
+  border: none;
+  border-radius: 8px;
+}
+
+.Editor {
+  font-family: var(--mono-font);
+  color: var(--textColor);
+}
+
+.Editor:focus,
+.Editor:active {
+  outline: none;
+}
+
+/* GitHub markdown formatting for Previewer */
+
+.Previewer h1,
+.Previewer h2,
+.Previewer h3,
+.Previewer h4,
+.Previewer h5,
+.Previewer h6 {
+  margin: 1em 0;
+}
+
+.Previewer h3,
+.Preveiwer h4,
+.Previewer h5,
+.Previewer h6 {
+  color: var(--textColor);
+}
+
+.Previewer h1 {
+  border-bottom: 2px solid black;
+}
+
+.Previewer h2 {
+  border-bottom: 1px solid black;
+}
+
+.Previewer p {
+  margin-bottom: 1em;
+}
+
+.Previewer li {
+  line-height: 1.5;
+}
+
+.Previewer code {
+  font-family: var(--mono-font);
+  color: var(--accentColor);
+  background-color: rgba(99, 35, 109, 0.1);
+}
+
+.Previewer pre {
+  width: 100%;
+  background-color: rgba(99, 35, 109, 0.1);
+}
+
+.Previewer pre > code {
+  background-color: unset;
+}
+
+.Previewer blockquote {
+  position: relative;
+  padding: 0.25em;
+  border-left: 3px solid var(--accentColor);
+}
+
+.Previewer table,
+.Previewer th,
+.Previewer td {
+  border: 1px solid var(--textColor);
+  border-collapse: collapse;
+}
+
+.Previewer table {
+  margin-top: 1em;
+}
+
+.Previewer th,
+.Previewer td {
+  padding: 6px;
+}
+
+.Previewer img,
+.Previewer svg {
+  padding: 3vh 3vw;
+  width: 100%;
+}
+
+/* Media rules */
+
+@media screen and (max-width: 768px) {
+  .App_container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr auto;
+  }
+
+  .App_bottomBar {
+    padding-top: 0;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .App_themeLabel {
+    display: none;
+  }
+  .App_themeLabel--small {
+    display: inline-block;
+  }
+}
